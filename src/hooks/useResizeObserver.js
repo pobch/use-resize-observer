@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 
-const useResizeObserver = ref => {
+const useResizeObserver = refs => {
   const [dimensions, setDimensions] = useState(null)
   useEffect(() => {
-    const observeTarget = ref.current
     const resizeObserver = new ResizeObserver(entries => {
       entries.forEach(entry => {
         console.log(entry)
         setDimensions(entry.contentRect)
       })
     })
-    resizeObserver.observe(observeTarget)
+    refs.forEach(ref => {
+      resizeObserver.observe(ref.current)
+    })
     return () => {
-      resizeObserver.unobserve(observeTarget)
+      console.log('%cUnobserve', 'background-color: salmon; color: white;')
+      refs.forEach(ref => {
+        resizeObserver.unobserve(ref.current)
+      })
     }
-  }, [ref])
+  }, [refs])
   return dimensions
 }
 
