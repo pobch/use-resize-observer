@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Try to resize the window and see <code>console.log()</code> result.
         </p>
         <a
           className="App-link"
